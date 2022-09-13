@@ -27,6 +27,9 @@ gem 'bootstrap', '~> 5.2.0'
 # Add Slim as template engine
 gem 'slim'
 
+# Use simple_form for form generation
+gem 'simple_form'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
