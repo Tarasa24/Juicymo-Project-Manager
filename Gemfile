@@ -21,6 +21,12 @@ gem "jbuilder"
 # Use Devise as authentication solution
 gem 'devise'
 
+# Use Bootstrap 5 for styling
+gem 'bootstrap', '~> 5.2.0'
+
+# Add Slim as template engine
+gem 'slim'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
