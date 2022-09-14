@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   end
 
   authenticated :user do
-    root 'dashboard#index', as: :authenticated_root
+    root 'projects#index', as: :authenticated_root
   end
 
-  get 'profile', to: 'profile#index'
+  resources :projects do
+    resources :tasks, only: [:create, :update, :destroy]
+  end
 end

@@ -5,6 +5,6 @@ class Task < ApplicationRecord
 
   # Associations
   belongs_to :project
-  has_and_belongs_to_many :tags
+  has_many :tags, through: :tags_tasks
   belongs_to :user, foreign_key: true
 end

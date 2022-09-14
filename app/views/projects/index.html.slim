@@ -1,0 +1,37 @@
+main
+  div style='display: flex; flex-direction: column; align-items: center;' class='mb-2'
+    h1 Projects
+    = link_to 'New Project', new_project_path, class: 'btn btn-primary'
+  table.table
+    thead
+      tr
+        th scope='col' Position
+        th scope='col' Title
+        th scope='col' Status
+        th scope='col' Percent Completed
+        th scope='col' Modified
+    tbody
+      - @projects.each do |project|
+        tr
+          td = project.position
+          td = link_to project.title, project
+          td
+            - if @projects_tasks_metrics[project.id][:total_tasks] == 0
+              span class='badge bg-secondary' No tasks
+            - elsif @projects_tasks_metrics[project.id][:completed_tasks] == @projects_tasks_metrics[project.id][:total_tasks]
+              span class='badge bg-success' Completed
+            - else
+              span class='badge bg-warning' In progress
+          td
+            - if @projects_tasks_metrics[project.id][:total_tasks] == 0
+              div.progress
+                div class='progress-bar bg-secondary' role='progressbar' style='width: 0%' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' 0%
+            - else
+              div.progress
+                div {
+                  class='progress-bar bg-success' role='progressbar'
+                  style='width: #{calculate_project_progress(@projects_tasks_metrics[project.id])}%'
+                  aria-valuenow='#{calculate_project_progress(@projects_tasks_metrics[project.id])}'
+                  aria-valuemin='0' aria-valuemax='100'}
+                  = "#{calculate_project_progress(@projects_tasks_metrics[project.id])}%"
+          td = project.updated_at
