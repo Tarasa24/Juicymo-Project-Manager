@@ -1,7 +1,6 @@
 main
   div style='display: flex; flex-direction: column; align-items: center;' class='mb-2'
     h1 Projects
-    = link_to 'New Project', new_project_path, class: 'btn btn-primary'
   table.table
     thead
       tr
@@ -9,7 +8,7 @@ main
         th scope='col' Title
         th scope='col' Status
         th scope='col' Percent Completed
-        th scope='col' Modified
+        th scope='col' Actions
     tbody
       - @projects.each do |project|
         tr
@@ -25,4 +24,10 @@ main
             = render partial: 'partials/projects/project_status', locals: { task_metrics: @projects_tasks_metrics[project.id]  }
           td
             = render partial: 'partials/projects/task_complete_bar', locals: { task_metrics: @projects_tasks_metrics[project.id] }
-          td = project.updated_at
+          td style='display: flex; gap: 10px;'
+            = link_to 'Edit', edit_project_path(project), class: 'btn btn-primary'
+            = link_to 'Delete', project_path(project), method: :delete,
+                      data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+
+  div style='display: flex; gap: 10px; width: 100%; justify-content: center;'
+    = link_to 'New Project', new_project_path, class: 'btn btn-primary'
