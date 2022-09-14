@@ -1,0 +1,6 @@
+- if task_metrics[:total_tasks] == 0
+  span class='badge bg-secondary' No tasks
+- elsif task_metrics[:completed_tasks] == task_metrics[:total_tasks]
+  span class='badge bg-success' Completed
+- else
+  span class='badge bg-warning' In progress

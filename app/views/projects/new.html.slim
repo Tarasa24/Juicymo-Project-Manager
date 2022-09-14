@@ -1,0 +1,5 @@
+main style='max-width: 500px; margin: auto;'
+  h2 New Project
+  = simple_form_for @project do |f|
+    = f.input :title
+    = f.submit 'Create Project', class: 'btn btn-primary mt-2'

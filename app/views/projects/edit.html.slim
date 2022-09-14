@@ -1,0 +1,7 @@
+main style='display: flex; flex-direction: column; align-items: center;' class='mb-2'
+  h1 Edit Project
+  = simple_form_for @project do |f|
+    = f.input :title
+    = f.button :submit, class: 'btn btn-primary mt-2'
+
+  = button_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger mt-2'
