@@ -26,8 +26,8 @@ main
             = render partial: 'partials/projects/task_complete_bar', locals: { task_metrics: @projects_tasks_metrics[project.id] }
           td style='display: flex; gap: 10px;'
             = link_to 'Edit', edit_project_path(project), class: 'btn btn-primary'
-            = link_to 'Delete', project_path(project), method: :delete,
-                      data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+            = button_to 'Delete', project_path(project), method: :delete,
+                        form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'btn btn-danger'
 
   div style='display: flex; gap: 10px; width: 100%; justify-content: center;'
     = link_to 'New Project', new_project_path, class: 'btn btn-primary'
