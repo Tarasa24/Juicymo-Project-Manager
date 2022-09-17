@@ -10,9 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_13_202048) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_17_201915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachment_binaries", force: :cascade do |t|
+    t.integer "attachment_id"
+    t.binary "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attachment_id"], name: "index_attachment_binaries_on_attachment_id"
+  end
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer "owner_id"
+    t.string "owner_type"
+    t.string "token"
+    t.string "digest"
+    t.string "role"
+    t.string "type"
+    t.string "file_name"
+    t.string "file_type"
+    t.string "cache_type"
+    t.string "cache_max_age"
+    t.string "disposition"
+    t.integer "file_size"
+    t.integer "parent_id"
+    t.boolean "processed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "custom"
+    t.boolean "serve", default: true
+    t.index ["owner_id"], name: "index_attachments_on_owner_id"
+    t.index ["token"], name: "index_attachments_on_token"
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string "title", null: false

@@ -79,3 +79,5 @@ gem 'importmap-rails'
 gem 'turbo-rails'
 
 gem 'pagy'
+
+gem 'attach'
