@@ -1,22 +1,16 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <%= link_to "Home", authenticated_root_path, class: "navbar-brand" %>
-    </div>
-
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav">
-        <li>
-          <%= link_to "Projects", projects_path, class: "nav-link" %>
-        </li>
-        <li>
-          <%= link_to "Tasks", tasks_path, class: "nav-link" %>
-        </li>
-        <li>
-          <%= link_to "Tags", tags_path, class: "nav-link" %>
-        </li>
-      </ul>
-    </div>
+    <ul class="navbar-nav">
+      <li>
+        <%= link_to "Projects", projects_path, class: "nav-link" %>
+      </li>
+      <li>
+        <%= link_to "Tasks", tasks_path, class: "nav-link" %>
+      </li>
+      <li>
+        <%= link_to "Tags", tags_path, class: "nav-link" %>
+      </li>
+    </ul>
 
     <div class="d-flex">
       <ul class="navbar-nav">
