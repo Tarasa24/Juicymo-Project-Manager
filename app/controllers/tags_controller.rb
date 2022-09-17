@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @tags = Tag.where(user_id: current_user.id)
+    @pagy, @tags = pagy(Tag.where(user_id: current_user.id))
   end
 
   def destroy

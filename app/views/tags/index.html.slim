@@ -16,5 +16,6 @@ main
             = button_to 'Delete', tag_path(tag), method: :delete, class: 'btn btn-danger',
                         form: { data: { turbo_confirm: 'Are you sure?' } }
 
-  div style='display: flex; gap: 10px; width: 100%; justify-content: center;'
+  div style='display: flex; justify-content: center; flex-direction: column; align-items: center;'
+    == pagy_bootstrap_nav(@pagy)
     = link_to 'New Tag', new_tag_path, class: 'btn btn-primary'

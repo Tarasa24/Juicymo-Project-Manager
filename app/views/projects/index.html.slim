@@ -29,5 +29,6 @@ main
             = button_to 'Delete', project_path(project), method: :delete,
                         form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'btn btn-danger'
 
-  div style='display: flex; gap: 10px; width: 100%; justify-content: center;'
+  div style='display: flex; justify-content: center; flex-direction: column; align-items: center;'
+    == pagy_bootstrap_nav(@pagy)
     = link_to 'New Project', new_project_path, class: 'btn btn-primary'

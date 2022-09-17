@@ -27,3 +27,6 @@ main
             = link_to 'Edit', edit_project_task_path(task.project, task), class: 'btn btn-primary'
             = button_to 'Delete', project_task_path(task.project, task), method: :delete,
                         form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'btn btn-danger'
+
+  div style='display: flex; justify-content: center; flex-direction: column; align-items: center;'
+    == pagy_bootstrap_nav(@pagy)

@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @tasks = Task.where(user_id: current_user.id)
+    @pagy, @tasks = pagy(Task.where(user_id: current_user.id))
     @tags = Tag.left_joins(:tasks)
   end
 
