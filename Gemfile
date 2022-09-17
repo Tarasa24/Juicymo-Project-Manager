@@ -77,3 +77,5 @@ end
 gem 'importmap-rails'
 
 gem 'turbo-rails'
+
+gem 'pagy'
