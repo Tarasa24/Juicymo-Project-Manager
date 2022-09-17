@@ -10,4 +10,6 @@ main style='max-width: 500px; margin: auto;'
     = f.input_field :tags, collection: @all_tags, as: :check_boxes, label_method: :title,
             value_method: :id, checked: @checked_tags, input_html: { multiple: true }
     br
+    = f.file_field :file
+    br
     = f.submit 'Update Task', class: 'btn btn-primary mt-2'

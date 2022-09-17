@@ -106,7 +106,7 @@ class TasksController < ApplicationController
 
   private
     def task_params
-      params.require(:task).permit(:title, :description, :is_done, :tags)
+      params.require(:task).permit(:title, :description, :is_done, :tags, :file)
     end
 
     def check_ownership(project)

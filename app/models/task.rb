@@ -3,6 +3,9 @@ class Task < ApplicationRecord
   validates :title, presence: true
   validates :is_done, inclusion: { in: [true, false] }
 
+  # Attachments
+  attachment :file
+
   # Associations
   belongs_to :project
   belongs_to :user
