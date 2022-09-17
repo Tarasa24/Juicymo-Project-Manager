@@ -7,11 +7,14 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @user = current_user
-    @pagy, @projects = pagy(Project.where(user_id: @user.id).order(:position))
+    if params[:query].present?
+      @pagy, @projects = pagy(Project.search(params[:query]).where(user: current_user))
+    else
+      @pagy, @projects = pagy(Project.where(user_id: current_user.id).order(:position))
+    end
 
     # Get the project statuses
-    @projects_tasks_metrics = Project.tasks_metrics(@user)
+    @projects_tasks_metrics = Project.tasks_metrics(current_user)
   end
 
   # GET /projects/1

@@ -74,4 +74,8 @@ class Project < ApplicationRecord
       move_down
     end
   end
+
+  def self.search(query)
+    Project.where('lower(title) LIKE ?', "%#{query.downcase}%").order(:position)
+  end
 end

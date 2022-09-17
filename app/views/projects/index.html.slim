@@ -1,6 +1,7 @@
 main
   div style='display: flex; flex-direction: column; align-items: center;' class='mb-2'
     h1 Projects
+    = render 'partials/search_bar', search_path: projects_path, placeholder: 'Search projects'
   table.table.table-striped
     thead
       tr
@@ -19,7 +20,7 @@ main
               b style='margin: 0 10px;' = project.position
               = button_to "▼", project_path(project.id), params: { direction: 'down' },
                       method: :patch, class: 'btn btn-light', disabled: project.position == @projects.count
-          td = link_to project.title, project
+          td = link_to highlight(project.title, params[:query]), project_path(project)
           td
             = render partial: 'partials/projects/project_status', locals: { task_metrics: @projects_tasks_metrics[project.id]  }
           td

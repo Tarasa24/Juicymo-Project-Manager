@@ -1,6 +1,7 @@
 main
   div style='display: flex; flex-direction: column; align-items: center;' class='mb-2'
     h1 Tags
+    = render 'partials/search_bar', search_path: tags_path, placeholder: 'Search tags'
   table.table.table-striped
     thead
       tr
@@ -10,7 +11,7 @@ main
     tbody
       - @tags.each do |tag|
         tr
-          td = tag.title
+          td = highlight(tag.title, params[:query])
           td = tag.tasks.count
           td
             = button_to 'Delete', tag_path(tag), method: :delete, class: 'btn btn-danger',
