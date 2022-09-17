@@ -1,0 +1,25 @@
+main
+  table.table.table-striped
+    thead
+      tr
+        th Is done?
+        th Title
+        th Description
+        th Project
+        th Tags
+        th Actions
+    tbody
+      - @tasks.each do |task|
+        tr
+          td= button_to project_task_path(task.project, task), method: :patch,
+                        params: { task: { is_done: !task.is_done } }, class: 'btn btn-light',
+                        title: task.is_done ? 'Mark as not done' : 'Mark as done' do
+            = task.is_done ? '✔' : '❌'
+          td= task.title
+          td= task.description
+          td= link_to task.project.title, task.project
+          td
+          td style='display: flex; gap: 10px;'
+            = link_to 'Edit', edit_project_task_path(task.project, task), class: 'btn btn-primary'
+            = button_to 'Delete', project_task_path(task.project, task), method: :delete,
+                        form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'btn btn-danger'

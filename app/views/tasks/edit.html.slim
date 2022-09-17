@@ -1,0 +1,8 @@
+main style='max-width: 500px; margin: auto;'
+  h1 Edit Task
+
+  = simple_form_for @task, url: project_task_path(@project, @task), method: :patch do |f|
+    = f.input :title
+    = f.input :description
+    = f.input :is_done
+    = f.submit 'Update Task', class: 'btn btn-primary mt-2'
