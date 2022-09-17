@@ -2,6 +2,8 @@ main
   div style='display: flex; flex-direction: column; align-items: center;' class='mb-2'
     h1 Tasks
     = render 'partials/search_bar', search_path: tasks_path, placeholder: 'Search tasks'
+    br
+    = render 'partials/tasks/scopes', url: tasks_path
   table.table.table-striped
     thead
       tr

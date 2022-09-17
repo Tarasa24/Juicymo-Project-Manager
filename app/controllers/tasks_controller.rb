@@ -2,11 +2,16 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @tasks = Task.where(user_id: current_user.id)
+
     if params[:query].present?
-      @pagy, @tasks = pagy(Task.search(params[:query]).where(user: current_user))
-    else
-      @pagy, @tasks = pagy(Task.where(user_id: current_user.id))
+      @tasks = Task.search(params[:query])
     end
+    if params[:scope].present? && params[:scope] != 'all'
+      @tasks = @tasks.where(is_done: params[:scope] == 'done')
+    end
+
+    @pagy, @tasks = pagy(@tasks)
 
     @tags = Tag.left_joins(:tasks)
   end
