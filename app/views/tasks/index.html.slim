@@ -1,4 +1,6 @@
 main
+  div style='display: flex; flex-direction: column; align-items: center;' class='mb-2'
+    h1 Tasks
   table.table.table-striped
     thead
       tr
@@ -19,6 +21,8 @@ main
           td= task.description
           td= link_to task.project.title, task.project
           td
+            - @tags.where(id: task.tag_ids).distinct.each do |tag|
+              = link_to tag.title, '#', class: 'badge bg-info', style: 'margin-right: 5px;'
           td style='display: flex; gap: 10px;'
             = link_to 'Edit', edit_project_task_path(task.project, task), class: 'btn btn-primary'
             = button_to 'Delete', project_task_path(task.project, task), method: :delete,

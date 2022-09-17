@@ -5,4 +5,9 @@ main style='max-width: 500px; margin: auto;'
     = f.input :title
     = f.input :description
     = f.input :is_done, as: :boolean
+    = f.label :tags, 'Tags'
+    = link_to 'Create new tag', new_tag_path, class: 'btn btn-link'
+    = f.input_field :tags, collection: @all_tags, as: :check_boxes, label_method: :title,
+            value_method: :id, input_html: { multiple: true }
+    br
     = f.button :submit, class: 'btn btn-primary'

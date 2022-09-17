@@ -1,8 +1,13 @@
 main style='max-width: 500px; margin: auto;'
   h1 Edit Task
 
-  = simple_form_for @task, url: project_task_path(@project, @task), method: :patch do |f|
+  = simple_form_for @task, url: project_task_path(@task.project, @task), method: :patch do |f|
     = f.input :title
     = f.input :description
     = f.input :is_done
+    = f.label :tags, 'Tags'
+    = link_to 'Create new tag', new_tag_path, class: 'btn btn-link'
+    = f.input_field :tags, collection: @all_tags, as: :check_boxes, label_method: :title,
+            value_method: :id, checked: @checked_tags, input_html: { multiple: true }
+    br
     = f.submit 'Update Task', class: 'btn btn-primary mt-2'

@@ -3,11 +3,13 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.where(user_id: current_user.id)
+    @tags = Tag.left_joins(:tasks)
   end
 
   def new
     @task = Task.new
     @project = Project.find_by(id: params[:project_id])
+    @all_tags = Tag.where(user_id: current_user.id)
   end
 
   def create
@@ -27,6 +29,13 @@ class TasksController < ApplicationController
       t.user_id = current_user.id
       t.save!
     end
+
+    # Add tags
+    new_tags = params[:task][:tags].select { |t| t != '' }
+    new_tags.each do |tag_id|
+      @task.tags << Tag.find_by(id: tag_id)
+    end
+
     redirect_to project_path(params[:project_id])
   end
 
@@ -52,8 +61,8 @@ class TasksController < ApplicationController
 
     # Check if user is the owner of the project
     check_ownership(@task.project)
-
-    @project = @task.project
+    @all_tags = Tag.where(user_id: current_user.id)
+    @checked_tags = TagsTasks.where(task_id: @task.id).pluck(:tag_id)
   end
 
   def update
@@ -66,7 +75,18 @@ class TasksController < ApplicationController
     # Check if user is the owner of the project
     check_ownership(@task.project)
 
+    # Update the task
     @task.update(task_params)
+
+    # Update tags
+    unless params[:task][:tags].nil?
+      @task.tags.clear
+      new_tags = params[:task][:tags].select { |t| t != '' }
+      new_tags.each do |tag_id|
+        @task.tags << Tag.find_by(id: tag_id)
+      end
+    end
+
     redirect_to project_path(params[:project_id])
   end
 
@@ -86,7 +106,7 @@ class TasksController < ApplicationController
 
   private
     def task_params
-      params.require(:task).permit(:title, :description, :is_done)
+      params.require(:task).permit(:title, :description, :is_done, :tags)
     end
 
     def check_ownership(project)

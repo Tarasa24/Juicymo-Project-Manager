@@ -23,8 +23,7 @@ class ProjectsController < ApplicationController
       return
     end
 
-    # Get the project statuses
-    @projects_tasks_metrics = Project.tasks_metrics(current_user, @project.id)
+    @tags = Tag.get_tags_for_tasks_in_project(@project)
   end
 
   # GET /projects/new
