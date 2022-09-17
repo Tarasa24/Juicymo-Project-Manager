@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   end
 
   resources :tasks, only: [:index]
+  resources :tags, only: [:index, :new, :create, :destroy]
 end

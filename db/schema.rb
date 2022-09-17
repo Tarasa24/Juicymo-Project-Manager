@@ -67,6 +67,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_13_202048) do
 
   add_foreign_key "projects", "users"
   add_foreign_key "tags", "users"
+  add_foreign_key "tags_tasks", "tags"
+  add_foreign_key "tags_tasks", "tasks"
   add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "users"
 end

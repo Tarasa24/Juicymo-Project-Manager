@@ -1,0 +1,5 @@
+main style='max-width: 500px; margin: auto;'
+  h1 New Tag
+  = simple_form_for @tag, url: tags_path, method: :post do |f|
+    = f.input :title
+    = f.submit 'Create Tag', class: 'btn btn-primary mt-2'
