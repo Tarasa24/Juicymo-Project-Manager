@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TagsController < ApplicationController
   before_action :authenticate_user!
 
@@ -16,9 +18,9 @@ class TagsController < ApplicationController
 
     if @tag.user_id == current_user.id
       @tag.destroy
-      redirect_to tags_path, notice: 'Tag was successfully deleted.'
+      redirect_to tags_path, notice: "Tag was successfully deleted."
     else
-      redirect_to tags_path, alert: 'You are not authorized to delete this tag.'
+      redirect_to tags_path, alert: "You are not authorized to delete this tag."
     end
   end
 
@@ -35,7 +37,7 @@ class TagsController < ApplicationController
   end
 
   private
-  def tag_params
-    params.require(:tag).permit(:title)
-  end
+    def tag_params
+      params.require(:tag).permit(:title)
+    end
 end

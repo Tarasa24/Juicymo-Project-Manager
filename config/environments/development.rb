@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
@@ -27,7 +29,7 @@ Rails.application.configure do
   config.server_timing = true
 
   # Set Devise to use the default mailer
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

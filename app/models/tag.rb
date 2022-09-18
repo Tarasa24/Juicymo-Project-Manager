@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Tag < ApplicationRecord
   # Validations
   validates :title, presence: true
 
   # Associations
-  has_many :tags_tasks, class_name: 'TagsTasks', dependent: :delete_all
+  has_many :tags_tasks, class_name: "TagsTasks", dependent: :delete_all
   has_many :tasks, through: :tags_tasks
   belongs_to :user
 

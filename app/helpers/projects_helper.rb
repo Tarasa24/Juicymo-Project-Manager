@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectsHelper
   def calculate_project_progress(project_metrics)
     return 0 if project_metrics[:total_tasks].zero?

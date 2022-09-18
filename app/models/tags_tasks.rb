@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TagsTasks < ApplicationRecord
   # Associations
   belongs_to :tag

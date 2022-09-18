@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 # First delete uat user if already present
-User.where(email: 'uat@juicymo.cz').destroy_all
+User.where(email: "uat@juicymo.cz").destroy_all
 
 user = User.create(
   email: "uat@juicymo.cz",
@@ -50,7 +52,7 @@ only_task = Task.create(
   user_id: user.id
 )
 
-project3 = Project.create(
+Project.create(
   title: "Project #3",
   position: 3,
   user_id: user.id

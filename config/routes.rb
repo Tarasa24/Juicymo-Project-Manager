@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
 
   unauthenticated :user do
-    root 'home#index', as: :unauthenticated_root
+    root "home#index", as: :unauthenticated_root
   end
 
   authenticated :user do
-    root 'projects#index', as: :authenticated_root
+    root "projects#index", as: :authenticated_root
   end
 
   resources :projects do

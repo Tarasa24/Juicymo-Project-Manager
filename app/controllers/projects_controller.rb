@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: [:show, :edit, :update, :destroy]
@@ -22,7 +24,7 @@ class ProjectsController < ApplicationController
   def show
     # Check if project exists
     if @project.nil?
-      redirect_to projects_path, alert: 'Project not found.'
+      redirect_to projects_path, alert: "Project not found."
       return
     end
 
@@ -45,10 +47,10 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save!
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to @project, notice: "Project was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
-        format.html { render :new, alert: 'Project could not be created.' }
+        format.html { render :new, alert: "Project could not be created." }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
@@ -57,10 +59,10 @@ class ProjectsController < ApplicationController
   def move(project, direction)
     respond_to do |format|
       if project.move_position(direction)
-        format.html { redirect_to projects_path, notice: 'Project was successfully moved.' }
+        format.html { redirect_to projects_path, notice: "Project was successfully moved." }
         format.json { render :show, status: :ok, location: @project }
       else
-        format.html { redirect_to projects_path, alert: 'Project could not be moved.' }
+        format.html { redirect_to projects_path, alert: "Project could not be moved." }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
@@ -74,7 +76,7 @@ class ProjectsController < ApplicationController
     else
       respond_to do |format|
         if @project.update(project_params)
-          format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+          format.html { redirect_to @project, notice: "Project was successfully updated." }
           format.json { render :show, status: :ok, location: @project }
         else
           format.html { render :edit }
@@ -89,7 +91,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -107,7 +109,7 @@ class ProjectsController < ApplicationController
 
     def verify_owner
       if @project.user_id != current_user.id
-        redirect_to projects_path, alert: 'You are not the owner of this project.'
+        redirect_to projects_path, alert: "You are not the owner of this project."
       end
     end
 end
