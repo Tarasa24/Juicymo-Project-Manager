@@ -20,6 +20,7 @@ gem "jbuilder"
 
 # Use Devise as authentication solution
 gem 'devise'
+gem 'devise-i18n'
 
 # Use Bootstrap 5 for styling
 gem 'bootstrap', '~> 5.2.0'

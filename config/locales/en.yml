@@ -1,33 +1,92 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  # Shared
+  shared:
+    login: "Log in"
+    signup: "Sign up"
+    logout: "Log out"
+    search: "Search"
+    edit: "Edit"
+    delete: "Delete"
+    update: "Update"
+    turbo_confirm: "Are you sure you want to delete this record?"
+
+  # Views
+  nav:
+    home: "Home"
+    projects: "Projects"
+    tasks: "Tasks"
+    tags: "Tags"
+  home:
+    index:
+      title: "Project Management System Dashboard"
+      subtitle: "You have to be authenticated to continue"
+  projects:
+    _project_status:
+      no_tasks: "No tasks"
+      completed: "Completed"
+      in_progress: "In progress"
+    index:
+      title: "Projects list"
+      new: "New project"
+      search_placeholder: "Search in projects"
+      table:
+        position: "Position"
+        title: "Title"
+        status: "Status"
+        percent_complete: "Percent complete"
+        actions: "Actions"
+    edit:
+      title: "Edit project"
+      save: "Save"
+    new:
+      title: "New project"
+      create: "Create"
+    show:
+      edit: "Edit project"
+      delete: "Delete project"
+      new_task: "New task"
+  tasks:
+    _scopes:
+      all: "All"
+      done: "Done"
+      not_done: "Not done"
+      filter: "Filter"
+    index:
+      title: "Tasks list"
+      new: "New task"
+      search_placeholder: "Search in tasks"
+      table:
+        completed: "Completed"
+        title: "Title"
+        description: "Description"
+        project: "Project"
+        tags: "Tags"
+        actions: "Actions"
+        mark_as_complete: "Mark as complete"
+        mark_as_incomplete: "Mark as incomplete"
+    edit:
+      title: "Edit task"
+      save: "Save"
+      tags: "Tags"
+      create_new_tag: "Create new tag"
+    new:
+      title: "New task"
+      create: "Create"
+      tags: "Tags"
+      create_new_tag: "Create new tag"
+    show:
+      completed: "Completed"
+      download_file: "Download file"
+      create_new_tag: "Create new tag"
+  tags:
+    index:
+      title: "Tags list"
+      new: "New tag"
+      search_placeholder: "Search in tags"
+      table:
+        title: "Title"
+        tasks: "Tasks"
+        actions: "Actions"
+    new:
+      title: "New tag"
+      create: "Create"

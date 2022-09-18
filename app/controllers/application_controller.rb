@@ -2,6 +2,10 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   include Pagy::Backend
 
+  before_action do
+    I18n.locale = :cs
+  end
+
   protected
 
   def configure_permitted_parameters

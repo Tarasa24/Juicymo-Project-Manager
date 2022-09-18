@@ -1,5 +1,5 @@
 <main style="max-width: 500px; margin: auto;">
-  <h2>Log in</h2>
+  <h2><%= t('shared.login') %></h2>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="mb-3">
       <%= f.label :email, class: "form-label" %><br />
@@ -19,7 +19,7 @@
     <% end %>
 
     <div class="actions">
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+      <%= f.submit t('shared.login'), class: "btn btn-primary" %>
       <%= render "users/shared/links" %>
     </div>
   <% end %>

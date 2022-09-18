@@ -1,18 +1,18 @@
 main
   div style='display: flex; flex-direction: column; align-items: center;' class='mb-2'
-    h1 Tasks
-    = render 'partials/search_bar', search_path: tasks_path, placeholder: 'Search tasks'
+    h1 = t('.title')
+    = render 'partials/search_bar', search_path: tasks_path, placeholder: t('.search_placeholder')
     br
     = render 'partials/tasks/scopes', url: tasks_path
   table.table.table-striped
     thead
       tr
-        th Is done?
-        th Title
-        th Description
-        th Project
-        th Tags
-        th Actions
+        th =t('.table.completed')
+        th =t('.table.title')
+        th =t('.table.description')
+        th =t('.table.project')
+        th =t('.table.tags')
+        th =t('.table.actions')
     tbody
       - @tasks.each do |task|
         tr
@@ -20,16 +20,16 @@ main
                         params: { task: { is_done: !task.is_done } }, class: 'btn btn-light',
                         title: task.is_done ? 'Mark as not done' : 'Mark as done' do
             = task.is_done ? '✔' : '❌'
-          td= highlight(task.title, params[:query])
+          td= link_to highlight(task.title, params[:query]), project_task_path(task.project, task)
           td= task.description
           td= link_to task.project.title, task.project
           td
             - @tags.where(id: task.tag_ids).distinct.each do |tag|
               = link_to tag.title, '#', class: 'badge bg-info', style: 'margin-right: 5px;'
           td style='display: flex; gap: 10px;'
-            = link_to 'Edit', edit_project_task_path(task.project, task), class: 'btn btn-primary'
-            = button_to 'Delete', project_task_path(task.project, task), method: :delete,
-                        form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'btn btn-danger'
+            = link_to t('shared.edit'), edit_project_task_path(task.project, task), class: 'btn btn-primary'
+            = button_to t('shared.delete'), project_task_path(task.project, task), method: :delete,
+                        form: { data: { turbo_confirm: t('shared.turbo_confirm') } }, class: 'btn btn-danger'
 
   div style='display: flex; justify-content: center; flex-direction: column; align-items: center;'
     == pagy_bootstrap_nav(@pagy)

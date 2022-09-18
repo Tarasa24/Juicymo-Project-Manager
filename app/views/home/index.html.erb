@@ -1,9 +1,9 @@
 <main>
   <div style="text-align: center">
-    <h1>Project Management System Dashboard</h1>
-    <p>You have to be authenticated to continue</p>
+    <h1><%= t('.title') %></h1>
+    <p><%= t('.subtitle') %></p>
 
-    <%= link_to 'Log in', new_user_session_url %> |
-    <%= link_to 'Sign up', new_user_registration_url %>
+    <%= link_to t('shared.login'), new_user_session_url %> |
+    <%= link_to t('shared.signup'), new_user_registration_url %>
   </div>
 </main>

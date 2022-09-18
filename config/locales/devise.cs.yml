@@ -1,0 +1,17 @@
+cs:
+  users:
+    registrations:
+      edit:
+        title: "Upravit profil"
+        save: "Uložit"
+        account_deletion: "Zrušení účtu"
+        delete_account: "Smazat můj účet"
+        first_name: "Jméno"
+        second_name: "Příjmení"
+        password_blank: "pokud nechcete změnit heslo, nechte pole prázdné"
+        character_minimum: "znaků minimálně"
+        password_required: "heslo je vyžadováno pro uložení"
+      new:
+        first_name: "Jméno"
+        second_name: "Příjmení"
+        character_minimum: "znaků minimálně"
