@@ -2,11 +2,13 @@ class TagsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @tags = Tag.where(user_id: current_user.id)
+
     if params[:query].present?
-      @pagy, @tags = pagy(Tag.search(params[:query]).where(user: current_user))
-    else
-      @pagy, @tags = pagy(Tag.where(user_id: current_user.id))
+      @tags = @tags.search(params[:query])
     end
+
+    @pagy, @tags = pagy(@tags)
   end
 
   def destroy

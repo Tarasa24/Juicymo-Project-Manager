@@ -2,17 +2,17 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @tasks = Task.where(user_id: current_user.id)
+    @tasks = Task.where(user_id: current_user.id).includes(:project)
 
     if params[:query].present?
-      @tasks = Task.search(params[:query])
+      @tasks = @tasks.search(params[:query])
     end
+
     if params[:scope].present? && params[:scope] != 'all'
       @tasks = @tasks.where(is_done: params[:scope] == 'done')
     end
 
     @pagy, @tasks = pagy(@tasks)
-
     @tags = Tag.left_joins(:tasks)
   end
 
