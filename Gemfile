@@ -88,3 +88,8 @@ gem "turbo-rails"
 gem "pagy"
 
 gem "attach"
+
+group :development, :test do
+  gem 'rspec-rails', '~> 6.0.0.rc1'
+  gem 'factory_bot'
+end
