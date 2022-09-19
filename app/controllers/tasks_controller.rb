@@ -32,7 +32,7 @@ class TasksController < ApplicationController
     # Check if project exists
     @project = Project.find_by(id: params[:project_id], user_id: current_user.id)
     if @project.nil?
-      redirect_to projects_path, alert: "Project not found."
+      redirect_to projects_path, alert: t('projects.not_found')
       return
     end
 
@@ -40,15 +40,17 @@ class TasksController < ApplicationController
     @task = Task.create(task_params).tap do |t|
       t.project_id = @project.id
       t.user_id = current_user.id
-      t.save!
     end
 
-    # Update tags
-    unless params[:task][:tags].nil?
-      set_tags(params[:task][:tags].select { |t| t != "" })
+    if @task.save!
+      # Update tags
+      unless params[:task][:tags].nil?
+        set_tags(params[:task][:tags].select { |t| t != "" })
+      end
+      redirect_to project_path(params[:project_id]), notice: t(".success")
+    else
+      redirect_to project_path(params[:project_id]), alert: t(".failure")
     end
-
-    redirect_to project_path(params[:project_id])
   end
 
   # GET /projects/xx/tasks/1
@@ -68,28 +70,32 @@ class TasksController < ApplicationController
     # @task is already set by set_task
 
     # Update the task
-    @task.update(task_params)
-
-    # Update tags (remove all and add new ones)
-    unless params[:task][:tags].nil?
-      set_tags(params[:task][:tags].select { |t| t != "" })
+    if @task.update(task_params)
+      # Update tags (remove all and add new ones)
+      unless params[:task][:tags].nil?
+        set_tags(params[:task][:tags].select { |t| t != "" })
+      end
+      redirect_to project_path(params[:project_id]), notice: t(".success")
+    else
+      redirect_to project_path(params[:project_id]), alert: t(".failure")
     end
-
-    redirect_to project_path(params[:project_id])
   end
 
   # DELETE /projects/xx/tasks/1
   def destroy
     # @task is already set by set_task
-    @task.destroy
-    redirect_to project_path(params[:project_id])
+    if @task.destroy
+      redirect_to project_path(params[:project_id]), notice: t(".success")
+    else
+      redirect_to project_path(params[:project_id]), alert: t(".failure")
+    end
   end
 
   private
   # Automatically set the @task variable and redirect if not found
   def set_task
     @task = Task.where(id: params[:id], user_id: current_user.id).first
-    redirect_to projects_path, alert: "Task not found." if @task.nil?
+    redirect_to projects_path, alert: t('.not_found') if @task.nil?
   end
 
   # Filter the params

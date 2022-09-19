@@ -21,6 +21,7 @@ en:
       title: "Project Management System Dashboard"
       subtitle: "You have to be authenticated to continue"
   projects:
+    not_found: "Project not found."
     _project_status:
       no_tasks: "No tasks"
       completed: "Completed"
@@ -45,7 +46,17 @@ en:
       edit: "Edit project"
       delete: "Delete project"
       new_task: "New task"
+    create:
+      success: "Project was successfully created."
+      failure: "Project could not be created."
+    update:
+      success: "Project was successfully updated."
+      failure: "Project could not be updated."
+    destroy:
+      success: "Project was successfully deleted."
+      failure: "Project could not be deleted."
   tasks:
+    not_found: "Task not found."
     _scopes:
       all: "All"
       done: "Done"
@@ -78,7 +89,17 @@ en:
       completed: "Completed"
       download_file: "Download file"
       create_new_tag: "Create new tag"
+    create:
+      success: "Task was successfully created."
+      failure: "Task could not be created."
+    update:
+      success: "Task was successfully updated."
+      failure: "Task could not be updated."
+    destroy:
+      success: "Task was successfully deleted."
+      failure: "Task could not be deleted."
   tags:
+    not_found: "Tag not found."
     index:
       title: "Tags list"
       new: "New tag"
@@ -90,3 +111,9 @@ en:
     new:
       title: "New tag"
       create: "Create"
+    destroy:
+      success: "Tag was successfully deleted."
+      failure: "Tag could not be deleted."
+    create:
+      success: "Tag was successfully created."
+      failure: "Tag could not be created."

@@ -21,6 +21,7 @@ cs:
       title: "Systém pro správu projektů"
       subtitle: "Pro pokračování se musíte přihlásit"
   projects:
+    not_found: "Projekt nebyl nalezen."
     _project_status:
       no_tasks: "Žádné úkoly"
       completed: "Dokončeno"
@@ -45,7 +46,17 @@ cs:
       edit: "Upravit projekt"
       delete: "Smazat projekt"
       new_task: "Nový úkol"
+    create:
+      success: "Projekt byl úspěšně vytvořen."
+      failure: "Projekt nemohl být vytvořen."
+    update:
+      success: "Projekt byl úspěšně aktualizován."
+      failure: "Projekt nemohl být aktualizován."
+    destroy:
+      success: "Projekt byl úspěšně smazán."
+      failure: "Projekt nemohl být smazán."
   tasks:
+    not_found: "Úkol nebyl nalezen."
     _scopes:
       all: "Všechny"
       done: "Dokončené"
@@ -78,7 +89,17 @@ cs:
       completed: "Dokončeno"
       download_file: "Stáhnout soubor"
       create_new_task: "Vytvořit nový úkol"
+    create:
+      success: "Úkol byl úspěšně vytvořen."
+      failure: "Úkol nemohl být vytvořen."
+    update:
+      success: "Úkol byl úspěšně aktualizován."
+      failure: "Úkol nemohl být aktualizován."
+    destroy:
+      success: "Úkol byl úspěšně smazán."
+      failure: "Úkol nemohl být smazán."
   tags:
+    not_found: "Štítek nebyl nalezen."
     index:
       title: "Seznam štítků"
       new: "Nový štítek"
@@ -90,3 +111,9 @@ cs:
     new:
       title: "Nový štítek"
       create: "Vytvořit"
+    destroy:
+      success: "Štítek byl úspěšně smazán."
+      failure: "Štítek nemohl být smazán."
+    create:
+      success: "Štítek byl úspěšně vytvořen."
+      failure: "Štítek nemohl být vytvořen."

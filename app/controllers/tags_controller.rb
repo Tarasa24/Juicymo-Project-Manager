@@ -18,9 +18,11 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   def destroy
     # @tag is already set by set_tag
-    @tag.destroy
-
-    redirect_to tags_path, notice: "Tag was successfully destroyed."
+    if @tag.destroy
+      redirect_to tags_path, notice: t(".success")
+    else
+      redirect_to tags_path, alert: t(".failure")
+    end
   end
 
   # GET /tags/new
@@ -32,16 +34,20 @@ class TagsController < ApplicationController
   def create
     @tag = Tag.create(tag_params).tap do |t|
       t.user_id = current_user.id
-      t.save!
     end
-    redirect_to tags_path
+
+    if @tag.save!
+      redirect_to tags_path, notice: t(".success")
+    else
+      redirect_to tags_path, alert: t(".failure")
+    end
   end
 
   private
     # Automatically set the @task variable and redirect if not found
     def set_tags
       @tag = Tag.where(id: params[:id], user_id: current_user.id).first
-      redirect_to tags_path, alert: "Tag not found." if @tag.nil?
+      redirect_to tags_path, alert: t('.not_found') if @tag.nil?
     end
 
     # Filter the params

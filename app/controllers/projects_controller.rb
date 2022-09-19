@@ -38,9 +38,9 @@ class ProjectsController < ApplicationController
     @project = Project.create_with_position(project_params[:title], current_user)
 
     if @project.save!
-      redirect_to @project, notice: "Project was successfully created."
+      redirect_to projects_path, notice: t(".success")
     else
-      render :new, alert: "Project could not be created."
+      redirect_to projects_path, alert: t(".failure")
     end
   end
 
@@ -50,27 +50,35 @@ class ProjectsController < ApplicationController
 
     # In case user is trying to update the position
     if params[:direction].present?
-      @project.move_position(params[:direction].to_s)
-      redirect_to projects_path, notice: "Project was successfully moved."
+      if @project.move_position(params[:direction].to_s)
+        redirect_to projects_path, notice: t(".success")
+      else
+        redirect_to projects_path, alert: t(".failure")
+      end
     else # Otherwise, update the project
-      @project.update(project_params)
-      redirect_to projects_path, notice: "Project was successfully updated."
+      if @project.update(project_params)
+        redirect_to projects_path, notice: t(".success")
+      else
+        redirect_to projects_path, alert: t(".failure")
+      end
     end
   end
 
   # DELETE /projects/1
   def destroy
     # @project is already set by set_project
-
-    @project.destroy
-    redirect_to projects_url, notice: "Project was successfully destroyed."
+    if @project.destroy
+      redirect_to projects_url, notice: t(".success")
+    else
+      redirect_to projects_url, alert: t(".failure")
+    end
   end
 
   private
     # Automatically set the @project variable and redirect if not found
     def set_project
       @project = Project.where(id: params[:id], user_id: current_user.id).first
-      redirect_to projects_path, alert: "Project not found." if @project.nil?
+      redirect_to projects_path, alert: t('.not_found') if @project.nil?
     end
 
     # Filter the parameters

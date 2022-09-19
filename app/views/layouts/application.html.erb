@@ -19,12 +19,7 @@
     <%= yield %>
 
     <dev class="fixed-bottom">
-      <% if notice %>
-        <p class="alert alert-primary mb-0" role="alert"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-warning mb-0" role="alert"><%= alert %></p>
-      <% end %>
+      <%= render "partials/layouts/notice_alert_box", notice: notice, alert: alert %>
     </dev>
   </body>
 </html>

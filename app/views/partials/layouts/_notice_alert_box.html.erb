@@ -1,0 +1,22 @@
+<% if notice %>
+  <div class="alert alert-primary d-flex align-items-center mb-0" role="alert">
+    <b><%= notice %></b>
+    <span class="ms-auto">
+      <button type="button" class="btn btn-light" aria-label="Close"
+              onclick="this.parentElement.parentElement.remove()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </span>
+  </div>
+<% end %>
+<% if alert %>
+  <div class="alert alert-warning d-flex align-items-center mb-0" role="alert">
+    <b><%= alert %></b>
+    <span class="ms-auto">
+      <button type="button" class="btn btn-light" aria-label="Close"
+              onclick="this.parentElement.parentElement.remove()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </span>
+  </div>
+<% end %>
