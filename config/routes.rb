@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   end
 
   resources :projects do
-    resources :tasks
+    # Since each task always belongs to a project
+    resources :tasks, only: [:create, :update, :destroy, :edit, :new, :show]
   end
 
+  # But expose all tasks at /tasks as well (for the task list)
   resources :tasks, only: [:index]
   resources :tags, only: [:index, :new, :create, :destroy]
 end

@@ -16,6 +16,12 @@ class User < ApplicationRecord
   has_many :tags, dependent: :destroy
 
   # Methods
+
+  # Returns the full name of the user
+  # @return [String] the full name of the user
+  # @example
+  #  user.full_name
+  # => "John Doe"
   def full_name
     "#{first_name} #{second_name}"
   end

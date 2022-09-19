@@ -16,5 +16,5 @@ class Task < ApplicationRecord
   has_many :tags, through: :tags_tasks
 
   # Scopes
-  scope :search, -> (query) { where("lower(title) LIKE ?", "%#{query.downcase}%") }
+  include CommonScopes
 end

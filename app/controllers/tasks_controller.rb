@@ -2,7 +2,9 @@
 
 class TasksController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+  # GET /tasks
   def index
     @tasks = Task.where(user_id: current_user.id).includes(:project)
 
@@ -18,22 +20,21 @@ class TasksController < ApplicationController
     @tags = Tag.left_joins(:tasks)
   end
 
+  # GET /projects/xx/tasks/new
   def new
     @task = Task.new
     @project = Project.find_by(id: params[:project_id])
     @all_tags = Tag.where(user_id: current_user.id)
   end
 
+  # POST /projects/xx/tasks
   def create
     # Check if project exists
-    @project = Project.find_by(id: params[:project_id])
+    @project = Project.find_by(id: params[:project_id], user_id: current_user.id)
     if @project.nil?
       redirect_to projects_path, alert: "Project not found."
       return
     end
-
-    # Check if user is the owner of the project
-    check_ownership(@project)
 
     # Create the task
     @task = Task.create(task_params).tap do |t|
@@ -42,89 +43,66 @@ class TasksController < ApplicationController
       t.save!
     end
 
-    # Add tags
-    new_tags = params[:task][:tags].select { |t| t != "" }
-    new_tags.each do |tag_id|
-      @task.tags << Tag.find_by(id: tag_id)
+    # Update tags
+    unless params[:task][:tags].nil?
+      set_tags(params[:task][:tags].select { |t| t != "" })
     end
 
     redirect_to project_path(params[:project_id])
   end
 
+  # GET /projects/xx/tasks/1
   def show
-    @task = Task.find_by(id: params[:id])
-    if @task.nil?
-      redirect_to projects_path, alert: "Task not found."
-      return
-    end
-
-    # Check if user is the owner of the project
-    check_ownership(@task.project)
-
-    @project = @task.project
+    # @task is already set by set_task
   end
 
+  # GET /projects/xx/tasks/1/edit
   def edit
-    @task = Task.find_by(id: params[:id])
-    if @task.nil?
-      redirect_to projects_path, alert: "Task not found."
-      return
-    end
-
-    # Check if user is the owner of the project
-    check_ownership(@task.project)
+    # @task is already set by set_task
     @all_tags = Tag.where(user_id: current_user.id)
-    @checked_tags = TagsTasks.where(task_id: @task.id).pluck(:tag_id)
+    @checked_tags = TagsTasks.assigned_tags(@task.id)
   end
 
+  # PATCH/PUT /projects/xx/tasks/1
   def update
-    @task = Task.find_by(id: params[:id])
-    if @task.nil?
-      redirect_to projects_path, alert: "Task not found."
-      return
-    end
-
-    # Check if user is the owner of the project
-    check_ownership(@task.project)
+    # @task is already set by set_task
 
     # Update the task
     @task.update(task_params)
 
-    # Update tags
+    # Update tags (remove all and add new ones)
     unless params[:task][:tags].nil?
-      @task.tags.clear
-      new_tags = params[:task][:tags].select { |t| t != "" }
-      new_tags.each do |tag_id|
-        @task.tags << Tag.find_by(id: tag_id)
-      end
+      set_tags(params[:task][:tags].select { |t| t != "" })
     end
 
     redirect_to project_path(params[:project_id])
   end
 
+  # DELETE /projects/xx/tasks/1
   def destroy
-    @task = Task.find_by(id: params[:id])
-    if @task.nil?
-      redirect_to projects_path, alert: "Task not found."
-      return
-    end
-
-    # Check if user is the owner of the project
-    check_ownership(@task.project)
-
+    # @task is already set by set_task
     @task.destroy
     redirect_to project_path(params[:project_id])
   end
 
   private
-    def task_params
-      params.require(:task).permit(:title, :description, :is_done, :tags, :file)
-    end
+  # Automatically set the @task variable and redirect if not found
+  def set_task
+    @task = Task.where(id: params[:id], user_id: current_user.id).first
+    redirect_to projects_path, alert: "Task not found." if @task.nil?
+  end
 
-    def check_ownership(project)
-      if project.user_id != current_user.id
-        redirect_to projects_path, alert: "You are not the owner of this project."
-        nil
-      end
+  # Filter the params
+  def task_params
+    params.require(:task).permit(:title, :description, :is_done, :tags, :file)
+  end
+
+  # Sets tags for a task while clearing the old ones
+  # @param [Array] new_tags An array of tag ids
+  def set_tags(new_tags)
+    @task.tags.clear
+    new_tags.each do |tag|
+      @task.tags << Tag.find_by(id: tag)
     end
+  end
 end

@@ -12,7 +12,7 @@ main style='display: flex; flex-direction: column; align-items: center;' class='
     = link_to t('.download_file'), @task.file.url, class: 'btn btn-link'
 
   div.mt-2 style='display: flex; gap: 10px; width: 100%; justify-content: center;'
-    = link_to t('shared.edit'), edit_project_task_path(@project, @task), class: 'btn btn-primary'
-    = button_to t('shared.delete'), project_task_path(@project, @task), method: :delete,
+    = link_to t('shared.edit'), edit_project_task_path(@task.project, @task), class: 'btn btn-primary'
+    = button_to t('shared.delete'), project_task_path(@task.project, @task), method: :delete,
               form: { data: { turbo_confirm: t('shared.turbo_confirm') } }, class: 'btn btn-danger'
-    = link_to t('.create_new_task'), new_project_task_path(@project), class: 'btn btn-light'
+    = link_to t('.create_new_task'), new_project_task_path(@task.project), class: 'btn btn-light'

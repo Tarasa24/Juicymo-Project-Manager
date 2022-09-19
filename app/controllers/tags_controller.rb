@@ -2,7 +2,9 @@
 
 class TagsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_tags, only: [:show, :edit, :update, :destroy]
 
+  # GET /tags
   def index
     @tags = Tag.where(user_id: current_user.id)
 
@@ -13,21 +15,20 @@ class TagsController < ApplicationController
     @pagy, @tags = pagy(@tags)
   end
 
+  # DELETE /tags/1
   def destroy
-    @tag = Tag.find(params[:id])
+    # @tag is already set by set_tag
+    @tag.destroy
 
-    if @tag.user_id == current_user.id
-      @tag.destroy
-      redirect_to tags_path, notice: "Tag was successfully deleted."
-    else
-      redirect_to tags_path, alert: "You are not authorized to delete this tag."
-    end
+    redirect_to tags_path, notice: "Tag was successfully destroyed."
   end
 
+  # GET /tags/new
   def new
     @tag = Tag.new
   end
 
+  # POST /tags
   def create
     @tag = Tag.create(tag_params).tap do |t|
       t.user_id = current_user.id
@@ -37,6 +38,13 @@ class TagsController < ApplicationController
   end
 
   private
+    # Automatically set the @task variable and redirect if not found
+    def set_tags
+      @tag = Tag.where(id: params[:id], user_id: current_user.id).first
+      redirect_to tags_path, alert: "Tag not found." if @tag.nil?
+    end
+
+    # Filter the params
     def tag_params
       params.require(:tag).permit(:title)
     end
