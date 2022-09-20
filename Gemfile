@@ -60,25 +60,20 @@ group :development, :test do
 end
 
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+end
 
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
-
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
-
+group :development, :test do
   gem "bullet"
   gem "rubocop", require: false
   gem "rubocop-rails_config", require: false
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "rails-controller-testing"
 end
 
 gem "importmap-rails"
@@ -92,4 +87,5 @@ gem "attach"
 group :development, :test do
   gem 'rspec-rails', '~> 6.0.0.rc1'
   gem 'factory_bot'
+  gem 'faker'
 end
