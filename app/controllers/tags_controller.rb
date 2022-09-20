@@ -15,16 +15,6 @@ class TagsController < ApplicationController
     @pagy, @tags = pagy(@tags)
   end
 
-  # DELETE /tags/1
-  def destroy
-    # @tag is already set by set_tag
-    if @tag.destroy
-      redirect_to tags_path, notice: t(".success")
-    else
-      redirect_to tags_path, alert: t(".failure")
-    end
-  end
-
   # GET /tags/new
   def new
     @tag = Tag.new
@@ -37,6 +27,16 @@ class TagsController < ApplicationController
     end
 
     if @tag.save!
+      redirect_to tags_path, notice: t(".success")
+    else
+      redirect_to tags_path, alert: t(".failure")
+    end
+  end
+
+  # DELETE /tags/1
+  def destroy
+    # @tag is already set by set_tag
+    if @tag.destroy
       redirect_to tags_path, notice: t(".success")
     else
       redirect_to tags_path, alert: t(".failure")

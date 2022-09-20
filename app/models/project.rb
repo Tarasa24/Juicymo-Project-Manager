@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class Project < ApplicationRecord
+  after_destroy :update_positions_after_destroy
+  before_validation :set_position, on: :create
+
   # Validations
   validates :title, presence: true
-  validates :position, presence: true
+  validates :position, presence: true,
+            numericality: { only_integer: true, greater_than: 0 }
 
   # Associations
   has_many :tasks, dependent: :destroy
@@ -14,23 +18,6 @@ class Project < ApplicationRecord
 
   # Methods
 
-  # Creates a new project and sets the position to the last position + 1
-  # @param title [String] The title
-  # @param user [User] The user
-  # @return [Project] The project
-  # @example
-  # Project.create_with_position("New project", current_user)
-  # # => #<Project id: 1, title: "New project", position: 1, ...>
-  # Project.create_with_position("New project 2", current_user)
-  # # => #<Project id: 2, title: "New project 2", position: 2, ...>
-  def self.create_with_position(title, user)
-    # Get the last project position
-    last_project = Project.where(user_id: user.id).order(position: :desc).first
-    position = last_project ? last_project.position + 1 : 1
-
-    Project.create(title:, position:, user_id: user.id)
-  end
-
   # Get metrics about the project's tasks
   # @param user [User] The user
   # @return [Hash] The metrics
@@ -38,14 +25,14 @@ class Project < ApplicationRecord
   #  Project.tasks_metrics(user)
   # # => { 1 => { total_tasks: 3, completed_tasks: 1 }, 2 => { total_tasks: 2, completed_tasks: 0 } }
   def self.tasks_metrics(user)
-    Project.select("project.id AS project_id",
-                   "COUNT(task.id) AS total_tasks",
-                   "SUM(CASE WHEN task.is_done = true THEN 1 ELSE 0 END) AS completed_tasks")
-           .from("projects AS project")
-           .joins("LEFT JOIN tasks AS task ON task.project_id = project.id")
-           .where("project.user_id = ?", user.id)
-           .group("project.id")
-           .index_by { |project| project.project_id }.to_h
+    select("project.id AS project_id",
+           "COUNT(task.id) AS total_tasks",
+           "SUM(CASE WHEN task.is_done = true THEN 1 ELSE 0 END) AS completed_tasks")
+      .from("projects AS project")
+      .joins("LEFT JOIN tasks AS task ON task.project_id = project.id")
+      .where("project.user_id = ?", user.id)
+      .group("project.id")
+      .index_by { |project| project.project_id }.to_h
   end
 
   # Changes the position of the project depending on the parameter
@@ -75,6 +62,7 @@ class Project < ApplicationRecord
     if previous_project
       previous_project_position = previous_project.position
       previous_project.update(position:)
+
       update(position: previous_project_position)
     end
   end
@@ -88,7 +76,21 @@ class Project < ApplicationRecord
     if next_project
       next_project_position = next_project.position
       next_project.update(position:)
+
       update(position: next_project_position)
     end
+  end
+
+  # Set the position of the project to the last position + 1
+  def set_position
+    if position.nil?
+      last_project = Project.where(user_id:).order(position: :desc).first
+      self.position = last_project ? last_project.position + 1 : 1
+    end
+  end
+
+  # Update positions of projects after a project that has been destroyed
+  def update_positions_after_destroy
+    Project.where(user_id: self.user.id).where("position > ?", self.position).update_all("position = position - 1")
   end
 end

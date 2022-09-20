@@ -12,10 +12,7 @@ class Tag < ApplicationRecord
   # Scopes
   include CommonScopes
 
-  # Searches tags for a given query, defined by their title (case-insensitive)
-  # @param query [String] The query
-  scope :search, -> (query) { where("lower(title) LIKE ?", "%#{query.downcase}%") }
-  # Finds the tags that are not associated with the tasks found in a given project
+  # Finds the tags that are associated with the tasks found in a given project
   # @param project [Project] The project
   scope :for_tasks_in_project, -> (project) { Tag.left_joins(:tasks).where(tasks: { project_id: project.id }) }
 end

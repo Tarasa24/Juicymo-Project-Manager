@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   def create
-    @project = Project.create_with_position(project_params[:title], current_user)
+    @project = Project.new(title: project_params[:title], user_id: current_user.id)
 
     if @project.save!
       redirect_to projects_path, notice: t(".success")
