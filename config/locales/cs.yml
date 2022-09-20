@@ -117,3 +117,14 @@ cs:
     create:
       success: "Štítek byl úspěšně vytvořen."
       failure: "Štítek nemohl být vytvořen."
+
+  # Errors
+    errors:
+      messages:
+        not_saved:
+          one: "Něco se nepovedlo, protože 1 chyba zabránila tomu, aby se záznam uložil."
+          other: "Něco se nepovedlo, protože %{count} chyb zabránilo tomu, aby se záznam uložil."
+        record_invalid: "Validace selhala: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Nelze smazat záznam, protože existuje závislý záznam %{record}."
+          has_many: "Nelze smazat záznam, protože existují závislé záznamy: %{record}."

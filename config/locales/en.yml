@@ -88,7 +88,7 @@ en:
     show:
       completed: "Completed"
       download_file: "Download file"
-      create_new_tag: "Create new tag"
+      create_new_task: "Create new tag"
     create:
       success: "Task was successfully created."
       failure: "Task could not be created."
@@ -117,3 +117,14 @@ en:
     create:
       success: "Tag was successfully created."
       failure: "Tag could not be created."
+
+  # Errors
+    errors:
+      messages:
+        not_saved:
+          one: "1 error prohibited this %{resource} from being saved:"
+          other: "%{count} errors prohibited this %{resource} from being saved:"
+        record_invalid: "Validation failed: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Cannot delete record because a dependent %{record} exists"
+          has_many: "Cannot delete record because dependent %{record} exist"
