@@ -1,5 +1,7 @@
-require 'rails_helper'
-require 'requests/shared/shared_tests'
+# frozen_string_literal: true
+
+require "rails_helper"
+require "requests/shared/shared_tests"
 
 RSpec.describe "Tasks", type: :request do
   let(:test_user) { create(:user) }

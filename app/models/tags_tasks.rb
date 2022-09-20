@@ -10,5 +10,5 @@ class TagsTasks < ApplicationRecord
   belongs_to :task
 
   # Scopes
-  scope :assigned_tags, -> (task_id) { where(task_id: task_id).pluck(:tag_id) }
+  scope :assigned_tags, -> (task_id) { where(task_id:).pluck(:tag_id) }
 end

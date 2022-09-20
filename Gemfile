@@ -85,7 +85,7 @@ gem "pagy"
 gem "attach"
 
 group :development, :test do
-  gem 'rspec-rails', '~> 6.0.0.rc1'
-  gem 'factory_bot'
-  gem 'faker'
+  gem "rspec-rails", "~> 6.0.0.rc1"
+  gem "factory_bot"
+  gem "faker"
 end

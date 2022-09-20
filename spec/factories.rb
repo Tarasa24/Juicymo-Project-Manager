@@ -1,11 +1,13 @@
-require 'faker'
+# frozen_string_literal: true
+
+require "faker"
 
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
     password { Faker::Internet.password }
-    first_name { 'Test' }
-    second_name { 'User' }
+    first_name { "Test" }
+    second_name { "User" }
   end
 
   factory :project do

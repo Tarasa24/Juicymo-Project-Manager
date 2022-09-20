@@ -78,7 +78,7 @@ class ProjectsController < ApplicationController
     # Automatically set the @project variable and redirect if not found
     def set_project
       @project = Project.where(id: params[:id], user_id: current_user.id).first
-      redirect_to projects_path, alert: t('.not_found') if @project.nil?
+      redirect_to projects_path, alert: t(".not_found") if @project.nil?
     end
 
     # Filter the parameters

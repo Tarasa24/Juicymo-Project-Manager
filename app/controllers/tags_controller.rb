@@ -47,7 +47,7 @@ class TagsController < ApplicationController
     # Automatically set the @task variable and redirect if not found
     def set_tags
       @tag = Tag.where(id: params[:id], user_id: current_user.id).first
-      redirect_to tags_path, alert: t('.not_found') if @tag.nil?
+      redirect_to tags_path, alert: t(".not_found") if @tag.nil?
     end
 
     # Filter the params

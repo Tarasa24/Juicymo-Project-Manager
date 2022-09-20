@@ -1,5 +1,7 @@
-require 'rails_helper'
-require 'requests/shared/shared_tests'
+# frozen_string_literal: true
+
+require "rails_helper"
+require "requests/shared/shared_tests"
 
 RSpec.describe "Tags", type: :request do
   let(:test_user) { create(:user) }
@@ -89,7 +91,7 @@ RSpec.describe "Tags", type: :request do
     end
     it "should redirect to login page when not logged in" do
       tag = create(:tag, user: test_user)
-      test_not_logged_in(tag_path(tag), test_user, 'delete')
+      test_not_logged_in(tag_path(tag), test_user, "delete")
     end
     it "should redirect to the tags page when the tag does not exist" do
       delete tag_path(0)

@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe TagsTasks, type: :model do
   let(:test_user) { create(:user) }
@@ -14,7 +16,7 @@ RSpec.describe TagsTasks, type: :model do
       test_project = FactoryBot.create(:project, user: test_user)
       test_task = FactoryBot.create(:task, user: test_user, project: test_project)
 
-      expect(build(:tags_tasks, tag: nil, task:test_task)).to_not be_valid
+      expect(build(:tags_tasks, tag: nil, task: test_task)).to_not be_valid
     end
     it "is not valid without a task" do
       test_tag = FactoryBot.create(:tag, user: test_user)

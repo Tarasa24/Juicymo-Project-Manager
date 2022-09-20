@@ -1,8 +1,10 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe Task, type: :model do
   let(:test_user) { create(:user) }
-  context 'validations' do
+  context "validations" do
     test_project = nil
     before :each do
       test_project = FactoryBot.create(:project, user: test_user)

@@ -1,14 +1,16 @@
-def test_not_logged_in(path, user, method = 'get')
+# frozen_string_literal: true
+
+def test_not_logged_in(path, user, method = "get")
   sign_out user
 
   case method
-  when 'get'
+  when "get"
     get path
-  when 'post'
+  when "post"
     post path
-  when 'put'
+  when "put"
     put path
-  when 'delete'
+  when "delete"
     delete path
   end
   expect(response).to redirect_to(new_user_session_path)

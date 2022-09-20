@@ -32,7 +32,7 @@ class TasksController < ApplicationController
     # Check if project exists
     @project = Project.find_by(id: params[:project_id], user_id: current_user.id)
     if @project.nil?
-      redirect_to projects_path, alert: t('projects.not_found')
+      redirect_to projects_path, alert: t("projects.not_found")
       return
     end
 
@@ -92,23 +92,23 @@ class TasksController < ApplicationController
   end
 
   private
-  # Automatically set the @task variable and redirect if not found
-  def set_task
-    @task = Task.where(id: params[:id], user_id: current_user.id).first
-    redirect_to projects_path, alert: t('.not_found') if @task.nil?
-  end
-
-  # Filter the params
-  def task_params
-    params.require(:task).permit(:title, :description, :is_done, :tags, :file)
-  end
-
-  # Sets tags for a task while clearing the old ones
-  # @param [Array] new_tags An array of tag ids
-  def set_tags(new_tags)
-    @task.tags.clear
-    new_tags.each do |tag|
-      @task.tags << Tag.find_by(id: tag)
+    # Automatically set the @task variable and redirect if not found
+    def set_task
+      @task = Task.where(id: params[:id], user_id: current_user.id).first
+      redirect_to projects_path, alert: t(".not_found") if @task.nil?
     end
-  end
+
+    # Filter the params
+    def task_params
+      params.require(:task).permit(:title, :description, :is_done, :tags, :file)
+    end
+
+    # Sets tags for a task while clearing the old ones
+    # @param [Array] new_tags An array of tag ids
+    def set_tags(new_tags)
+      @task.tags.clear
+      new_tags.each do |tag|
+        @task.tags << Tag.find_by(id: tag)
+      end
+    end
 end
