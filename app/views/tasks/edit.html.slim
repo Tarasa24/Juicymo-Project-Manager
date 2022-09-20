@@ -1,0 +1,15 @@
+main style='max-width: 500px; margin: auto;'
+  h1 =t('.title')
+
+  = simple_form_for @task, url: project_task_path(@task.project, @task), method: :patch do |f|
+    = f.input :title
+    = f.input :description
+    = f.input :is_done
+    = f.label :tags, t('.tags')
+    = link_to t('.create_new_tag'), new_tag_path, class: 'btn btn-link'
+    = f.input_field :tags, collection: @all_tags, as: :check_boxes, label_method: :title,
+            value_method: :id, checked: @checked_tags, input_html: { multiple: true }
+    br
+    = f.file_field :file
+    br
+    = f.submit t('.save'), class: 'btn btn-primary mt-2'

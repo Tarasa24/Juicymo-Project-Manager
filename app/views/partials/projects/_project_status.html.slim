@@ -1,0 +1,6 @@
+- if task_metrics[:total_tasks] == 0
+  span class='badge bg-secondary' =t('projects._project_status.no_tasks')
+- elsif task_metrics[:completed_tasks] == task_metrics[:total_tasks]
+  span class='badge bg-success' =t('projects._project_status.completed')
+- else
+  span class='badge bg-warning' =t('projects._project_status.in_progress')

@@ -1,0 +1,20 @@
+<%= form_with url: url, method: :get, local: true do |form| %>
+  <div class="o-switch btn-group no-outline" data-toggle="buttons" role="group">
+    <label class="btn btn-light">
+      <input type="radio" name="scope" value="all"
+             <%= "checked" if params[:scope] == "all" || params[:scope].blank? %>>
+      <%= t('tasks._scopes.all') %>
+    </label>
+    <label class="btn btn-light">
+      <input type="radio" name="scope" value="done"
+             <%= "checked" if params[:scope] == "done" %>>
+      <%= t('tasks._scopes.done') %>
+    </label>
+    <label class="btn btn-light">
+      <input type="radio" name="scope" value="not-done"
+             <%= "checked" if params[:scope] == "not-done" %>>
+      <%= t('tasks._scopes.not_done') %>
+    </label>
+  </div>
+  <%= form.submit t('tasks._scopes.filter'), class: "btn btn-primary" %>
+<% end %>

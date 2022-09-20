@@ -1,0 +1,130 @@
+cs:
+  # Shared
+  shared:
+    login: "Přihlášení"
+    signup: "Registrace"
+    logout: "Odhlásit se"
+    search: "Hledat"
+    edit: "Upravit"
+    delete: "Smazat"
+    update: "Aktualizovat"
+    turbo_confirm: "Opravdu chcete smazat tento záznam?"
+
+  # Views
+  nav:
+    home: "Domů"
+    projects: "Projekty"
+    tasks: "Úkoly"
+    tags: "Štítky"
+  home:
+    index:
+      title: "Systém pro správu projektů"
+      subtitle: "Pro pokračování se musíte přihlásit"
+  projects:
+    not_found: "Projekt nebyl nalezen."
+    _project_status:
+      no_tasks: "Žádné úkoly"
+      completed: "Dokončeno"
+      in_progress: "Probíhá"
+    index:
+      title: "Seznam projektů"
+      new: "Nový projekt"
+      search_placeholder: "Vyhledávat v projektech"
+      table:
+        position: "Pořadí"
+        title: "Název"
+        status: "Stav"
+        percent_complete: "Procento dokončení"
+        actions: "Akce"
+    edit:
+      title: "Upravit projekt"
+      save: "Uložit"
+    new:
+      title: "Nový projekt"
+      create: "Vytvořit"
+    show:
+      edit: "Upravit projekt"
+      delete: "Smazat projekt"
+      new_task: "Nový úkol"
+    create:
+      success: "Projekt byl úspěšně vytvořen."
+      failure: "Projekt nemohl být vytvořen."
+    update:
+      success: "Projekt byl úspěšně aktualizován."
+      failure: "Projekt nemohl být aktualizován."
+    destroy:
+      success: "Projekt byl úspěšně smazán."
+      failure: "Projekt nemohl být smazán."
+  tasks:
+    not_found: "Úkol nebyl nalezen."
+    _scopes:
+      all: "Všechny"
+      done: "Dokončené"
+      not_done: "Nedokončené"
+      filter: "Filtrovat"
+    index:
+      title: "Seznam úkolů"
+      new: "Nový úkol"
+      search_placeholder: "Vyhledávat v úkolech"
+      table:
+        completed: "Dokončeno"
+        title: "Název"
+        description: "Popis"
+        project: "Projekt"
+        tags: "Štítky"
+        actions: "Akce"
+        mark_as_complete: "Označit jako dokončené"
+        mark_as_incomplete: "Označit jako nedokončené"
+    edit:
+      title: "Upravit úkol"
+      save: "Uložit"
+      tags: "Štítky"
+      create_new_tag: "Vytvořit nový štítek"
+    new:
+      title: "Nový úkol pro"
+      create: "Vytvořit"
+      tags: "Štítky"
+      create_new_tag: "Vytvořit nový štítek"
+    show:
+      completed: "Dokončeno"
+      download_file: "Stáhnout soubor"
+      create_new_task: "Vytvořit nový úkol"
+    create:
+      success: "Úkol byl úspěšně vytvořen."
+      failure: "Úkol nemohl být vytvořen."
+    update:
+      success: "Úkol byl úspěšně aktualizován."
+      failure: "Úkol nemohl být aktualizován."
+    destroy:
+      success: "Úkol byl úspěšně smazán."
+      failure: "Úkol nemohl být smazán."
+  tags:
+    not_found: "Štítek nebyl nalezen."
+    index:
+      title: "Seznam štítků"
+      new: "Nový štítek"
+      search_placeholder: "Vyhledávat v štítcích"
+      table:
+        title: "Název"
+        tasks: "Úkoly"
+        actions: "Akce"
+    new:
+      title: "Nový štítek"
+      create: "Vytvořit"
+    destroy:
+      success: "Štítek byl úspěšně smazán."
+      failure: "Štítek nemohl být smazán."
+    create:
+      success: "Štítek byl úspěšně vytvořen."
+      failure: "Štítek nemohl být vytvořen."
+
+  # Errors
+    errors:
+      messages:
+        not_saved:
+          one: "Něco se nepovedlo, protože 1 chyba zabránila tomu, aby se záznam uložil."
+          other: "Něco se nepovedlo, protože %{count} chyb zabránilo tomu, aby se záznam uložil."
+        record_invalid: "Validace selhala: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Nelze smazat záznam, protože existuje závislý záznam %{record}."
+          has_many: "Nelze smazat záznam, protože existují závislé záznamy: %{record}."

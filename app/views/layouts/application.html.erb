@@ -7,9 +7,19 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <%= render "partials/authenticated_nav" %>
+    <% else %>
+      <%= render "partials/unauthenticated_nav" %>
+    <% end %>
     <%= yield %>
+
+    <dev class="fixed-bottom">
+      <%= render "partials/layouts/notice_alert_box", notice: notice, alert: alert %>
+    </dev>
   </body>
 </html>

@@ -1,6 +1,22 @@
-Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+# frozen_string_literal: true
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+Rails.application.routes.draw do
+  devise_for :users
+
+  unauthenticated :user do
+    root "home#index", as: :unauthenticated_root
+  end
+
+  authenticated :user do
+    root "projects#index", as: :authenticated_root
+  end
+
+  resources :projects do
+    # Since each task always belongs to a project
+    resources :tasks, only: [:create, :update, :destroy, :edit, :new, :show]
+  end
+
+  # But expose all tasks at /tasks as well (for the task list)
+  resources :tasks, only: [:index]
+  resources :tags, only: [:index, :new, :create, :destroy]
 end

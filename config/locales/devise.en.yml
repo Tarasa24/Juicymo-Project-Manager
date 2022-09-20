@@ -1,0 +1,17 @@
+en:
+  user:
+    registrations:
+      edit:
+        title: "Edit user"
+        save: "Save"
+        account_deletion: "Account deletion"
+        delete_account: "Delete my account"
+        first_name: "First name"
+        second_name: "Second name"
+        password_blank: "leave blank if you don't want to change it"
+        character_minimum: "characters minimum"
+        password_required: "password is required in order to save"
+      new:
+        first_name: "First name"
+        second_name: "Second name"
+        character_minimum: "characters minimum"

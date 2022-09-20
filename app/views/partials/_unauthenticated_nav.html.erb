@@ -1,0 +1,8 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <%= link_to t('nav.home'), unauthenticated_root_path, class: "navbar-brand" %>
+    <div class="d-flex">
+      <%= link_to t('shared.login'), new_user_session_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</nav>

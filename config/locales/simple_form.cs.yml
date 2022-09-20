@@ -1,0 +1,18 @@
+cs:
+  simple_form:
+    "yes": 'Ano'
+    "no": 'Ne'
+    required:
+      text: 'povinné'
+      mark: '*'
+    error_notification:
+      default_message: "Prosím opravte následující chyby:"
+    labels:
+      task:
+        title: "Název"
+        description: "Popis"
+        is_done: "Dokončeno"
+      project:
+        title: "Název"
+      tag:
+        title: "Název"

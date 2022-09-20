@@ -1,0 +1,9 @@
+div
+  - if task_metrics[:total_tasks] != 0
+    div.progress
+      div {
+        class='progress-bar bg-success' role='progressbar'
+        style="width: #{calculate_project_progress(task_metrics)}%"
+        aria-valuenow="#{calculate_project_progress(task_metrics)}"
+        aria-valuemin='0' aria-valuemax='100' }
+        = "#{calculate_project_progress(task_metrics)}%"

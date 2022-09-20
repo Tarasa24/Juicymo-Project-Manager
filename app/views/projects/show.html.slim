@@ -1,0 +1,36 @@
+main style='display: flex; flex-direction: column; align-items: center;' class='mb-2'
+  h1 style='text-align: center;' = @project.title
+
+  table.table.table-striped
+    thead
+      tr
+        th scope='col' = t('tasks.index.table.completed')
+        th scope='col' = t('tasks.index.table.title')
+        th scope='col' = t('tasks.index.table.description')
+        th scope='col' = t('tasks.index.table.tags')
+        th scope='col' = t('tasks.index.table.actions')
+    tbody
+      - @project.tasks.each do |task|
+        tr
+          td
+            = button_to project_task_path(@project, task), method: :patch,
+                        params: { task: { is_done: !task.is_done } }, class: 'btn btn-light',
+                        title: task.is_done ? \
+                                t('tasks.index.table.mark_as_incomplete') :\
+                                t('tasks.index.table.mark_as_complete') do
+              = task.is_done ? '✔' : '❌'
+          td = link_to task.title, project_task_path(@project, task)
+          td = task.description
+          td.flex
+            - @tags.where(id: task.tag_ids).distinct.each do |tag|
+              = link_to tag.title, '#', class: 'badge bg-info', style: 'margin-right: 5px;'
+          td style='display: flex; gap: 10px;'
+            = link_to t('shared.edit'), edit_project_task_path(@project, task), class: 'btn btn-primary'
+            = button_to t('shared.delete'), project_task_path(@project, task), method: :delete,
+                      form: { data: { turbo_confirm: t('shared.turbo_confirm') } }, class: 'btn btn-danger'
+
+  div style='display: flex; gap: 10px; width: 100%; justify-content: center;'
+    = link_to t('.edit'), edit_project_path(@project), class: 'btn btn-primary'
+    = link_to t('.new_task'), new_project_task_path(@project), class: 'btn btn-secondary'
+    = button_to t('.delete'), project_path(@project), method: :delete,
+                form: { data: { turbo_confirm: t('shared.turbo_confirm') } }, class: 'btn btn-danger'

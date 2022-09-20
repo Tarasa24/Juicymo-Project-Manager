@@ -1,0 +1,5 @@
+main style='max-width: 500px; margin: auto;'
+  h1 =t('.title')
+  = simple_form_for @project do |f|
+    = f.input :title
+    = f.button :submit, t('.save'), class: 'btn btn-primary mt-2'
