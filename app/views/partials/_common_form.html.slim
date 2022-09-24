@@ -1,0 +1,4 @@
+= simple_form_for model, data: { turbo: false }, url: url  do |f|
+  = f.input :title
+  = yield f
+  = f.button :submit, submit_text, class: 'btn btn-primary mt-2'

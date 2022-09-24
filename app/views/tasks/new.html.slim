@@ -1,7 +1,6 @@
 main style='max-width: 500px; margin: auto;'
-  h2 ="#{t('.title')} #{@project.title}"
-  = simple_form_for @task, url: project_tasks_path do |f|
-    = f.input :title
+  h1 ="#{t('.title')} #{@project.title}"
+  = render 'partials/common_form', model: @task, url: project_tasks_url(@project) , submit_text: t('.create') do |f|
     = f.input :description
     = f.input :is_done, as: :boolean
     = f.label :tags, t('.tags')
@@ -11,4 +10,3 @@ main style='max-width: 500px; margin: auto;'
     br
     = f.file_field :file
     br
-    = f.button :submit, t('.create'), class: 'btn btn-primary mt-2'
