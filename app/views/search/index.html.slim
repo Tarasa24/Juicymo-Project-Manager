@@ -1,0 +1,11 @@
+main
+  table.table.table-striped
+    thead
+      tr
+        th= t('search.title')
+        th= t('search.type')
+    tbody
+      - @results.each do |result|
+        tr
+          td= link_to highlight(result["title"], @query), link(result)
+          td= result["type"]

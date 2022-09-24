@@ -11,11 +11,15 @@ cs:
     turbo_confirm: "Opravdu chcete smazat tento záznam?"
 
   # Views
+  search:
+    title: "Název"
+    type: "Typ"
   nav:
     home: "Domů"
     projects: "Projekty"
     tasks: "Úkoly"
     tags: "Štítky"
+    search: "Hledat v názvech"
   home:
     index:
       title: "Systém pro správu projektů"

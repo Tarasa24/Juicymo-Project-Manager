@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     root "projects#index", as: :authenticated_root
   end
 
+  get "/search", to: "search#index", as: :search
+
   resources :projects do
     # Since each task always belongs to a project
     resources :tasks, only: [:create, :update, :destroy, :edit, :new, :show]

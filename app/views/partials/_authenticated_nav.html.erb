@@ -10,6 +10,9 @@
       <li>
         <%= link_to t('nav.tags'), tags_path, class: "nav-link" %>
       </li>
+      <li>
+        <%= render 'partials/search_bar', search_path: search_path, placeholder: t('nav.search') %>
+      </li>
     </ul>
 
     <div class="d-flex">
