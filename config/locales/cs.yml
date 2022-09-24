@@ -14,6 +14,7 @@ cs:
   search:
     title: "Název"
     type: "Typ"
+    empty_query: "Prosím zadejte hledaný výraz."
   nav:
     home: "Domů"
     projects: "Projekty"
