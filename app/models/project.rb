@@ -54,29 +54,35 @@ class Project < ApplicationRecord
   private
     # Moves the project up. The position of the project is swapped with the previous project.
     def move_up
-      # Get the previous project
-      previous_project = Project.where(user_id:).where("position < ?", position).order(position: :desc).first
+      # Execute as transaction to prevent unexpected behaviour
+      Project.transaction do
+        # Get the previous project
+        previous_project = Project.where(user_id:).where("position < ?", position).order(position: :desc).first
 
-      # Swap the positions
-      if previous_project
-        previous_project_position = previous_project.position
-        previous_project.update(position:)
+        # Swap the positions
+        if previous_project
+          previous_project_position = previous_project.position
+          previous_project.update(position:)
 
-        update(position: previous_project_position)
+          update(position: previous_project_position)
+        end
       end
     end
 
     # Moves the project down. The position of the project is swapped with the next project.
     def move_down
-      # Get the next project
-      next_project = Project.where(user_id:).where("position > ?", position).order(:position).first
+      # Execute as transaction to prevent unexpected behaviour
+      Project.transaction do
+        # Get the next project
+        next_project = Project.where(user_id:).where("position > ?", position).order(:position).first
 
-      # Swap the positions
-      if next_project
-        next_project_position = next_project.position
-        next_project.update(position:)
+        # Swap the positions
+        if next_project
+          next_project_position = next_project.position
+          next_project.update(position:)
 
-        update(position: next_project_position)
+          update(position: next_project_position)
+        end
       end
     end
 
