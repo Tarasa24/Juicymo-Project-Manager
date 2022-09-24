@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SearchController < ApplicationController
   before_action :authenticate_user!
 
@@ -13,7 +15,7 @@ class SearchController < ApplicationController
       @results = ActiveRecord::Base.connection.execute(sql)
       @query = params[:query]
     else
-      redirect_to authenticated_root_path, notice: t('search.empty_query')
+      redirect_to authenticated_root_path, notice: t("search.empty_query")
     end
   end
 end
