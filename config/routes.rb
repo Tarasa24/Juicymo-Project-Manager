@@ -2,6 +2,8 @@
 
 Rails.application.routes.draw do
   devise_for :users
+  # Mock user_url that redirects to authenticated root because devise insists on using it as an after sign up redirect
+  get "/users", to: redirect("/"), as: :user
 
   unauthenticated :user do
     root "home#index", as: :unauthenticated_root

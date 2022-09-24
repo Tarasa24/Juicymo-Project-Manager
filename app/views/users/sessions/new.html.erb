@@ -1,14 +1,12 @@
 <main style="max-width: 500px; margin: auto;">
   <h2><%= t('shared.login') %></h2>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
     <div class="mb-3">
-      <%= f.label :email, class: "form-label" %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      <%= f.input :email, required: true, autofocus: true %>
     </div>
 
     <div class="mb-3">
-      <%= f.label :password, class: "form-label" %><br />
-      <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      <%= f.input :password, required: true %>
     </div>
 
     <% if devise_mapping.rememberable? %>

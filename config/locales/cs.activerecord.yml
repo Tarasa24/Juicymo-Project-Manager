@@ -1,0 +1,38 @@
+cs:
+  activerecord:
+    attributes:
+      user:
+        first_name: "Jméno"
+        second_name: "Příjmení"
+        email: "E-mail"
+        password: "Heslo"
+        password_confirmation: "Potvrzení hesla"
+        current_password: "Současné heslo"
+    errors:
+      models:
+        user:
+          attributes:
+            first_name:
+              blank: "nemůže být prázdné"
+              too_long: "je příliš dlouhé (max. %{count} znaků)"
+            second_name:
+              blank: "nemůže být prázdné"
+              too_long: "je příliš dlouhé (max. %{count} znaků)"
+            email:
+              blank: "nemůže být prázdné"
+              too_long: "je příliš dlouhé (max. %{count} znaků)"
+              invalid: "je neplatný"
+            password:
+              blank: "nemůže být prázdné"
+              too_long: "je příliš dlouhé (max. %{count} znaků)"
+              too_short: "je příliš krátké (min. %{count} znaků)"
+            password_confirmation:
+              blank: "nemůže být prázdné"
+              too_long: "je příliš dlouhé (max. %{count} znaků)"
+              too_short: "je příliš krátké (min. %{count} znaků)"
+              confirmation: "se neshoduje s heslem"
+            current_password:
+              blank: "nemůže být prázdné"
+              too_long: "je příliš dlouhé (max. %{count} znaků)"
+              too_short: "je příliš krátké (min. %{count} znaků)"
+              confirmation: "se neshoduje s heslem"
