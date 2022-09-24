@@ -15,10 +15,10 @@ main
         tr
           td
             div style='display: flex; flex-direction: row; align-items: center;'
-              = button_to "▲",  project_path(project.id), params: { direction: 'up' },
+              = button_to "▲", move_project_url(project.id), params: { direction: 'up' },
                       method: :patch, class: 'btn btn-light', disabled: project.position == 1
               b style='margin: 0 10px;' = project.position
-              = button_to "▼", project_path(project.id), params: { direction: 'down' },
+              = button_to "▼", move_project_url(project.id), params: { direction: 'down' },
                       method: :patch, class: 'btn btn-light', disabled: project.position == @projects.count
           td = link_to highlight(project.title, params[:query]), project_path(project)
           td

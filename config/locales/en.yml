@@ -52,6 +52,9 @@ en:
     update:
       success: "Project was successfully updated."
       failure: "Project could not be updated."
+    move:
+      success: "Project was successfully moved."
+      failure: "Project could not be moved."
     destroy:
       success: "Project was successfully deleted."
       failure: "Project could not be deleted."

@@ -52,6 +52,9 @@ cs:
     update:
       success: "Projekt byl úspěšně aktualizován."
       failure: "Projekt nemohl být aktualizován."
+    move:
+      success: "Projekt byl úspěšně přesunut."
+      failure: "Projekt nemohl být přesunut."
     destroy:
       success: "Projekt byl úspěšně smazán."
       failure: "Projekt nemohl být smazán."

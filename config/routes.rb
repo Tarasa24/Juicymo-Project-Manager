@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   resources :projects do
     # Since each task always belongs to a project
     resources :tasks, only: [:create, :update, :destroy, :edit, :new, :show]
+
+    member do
+      patch :move
+    end
   end
 
   # But expose all tasks at /tasks as well (for the task list)
