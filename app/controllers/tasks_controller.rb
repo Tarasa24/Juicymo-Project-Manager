@@ -43,9 +43,9 @@ class TasksController < ApplicationController
     end
 
     if @task.save!
-      # Update tags
+      # Update the tags
       unless params[:task][:tags].nil?
-        set_tags(params[:task][:tags].select { |t| t != "" })
+        set_tags(params[:task][:tags].to_a)
       end
       redirect_to project_path(params[:project_id]), notice: t(".success")
     else
@@ -61,7 +61,7 @@ class TasksController < ApplicationController
   # GET /projects/xx/tasks/1/edit
   def edit
     # @task is already set by set_task
-    @all_tags = Tag.where(user_id: current_user.id)
+    @all_tags = Tag.where(user_id: current_user.id).to_a
     @checked_tags = TagsTasks.assigned_tags(@task.id)
   end
 
@@ -71,9 +71,9 @@ class TasksController < ApplicationController
 
     # Update the task
     if @task.update(task_params)
-      # Update tags (remove all and add new ones)
+      # Update the tags
       unless params[:task][:tags].nil?
-        set_tags(params[:task][:tags].select { |t| t != "" })
+        set_tags(params[:task][:tags].to_a)
       end
       redirect_to project_path(params[:project_id]), notice: t(".success")
     else
@@ -106,9 +106,11 @@ class TasksController < ApplicationController
     # Sets tags for a task while clearing the old ones
     # @param [Array] new_tags An array of tag ids
     def set_tags(new_tags)
-      @task.tags.clear
-      new_tags.each do |tag|
-        @task.tags << Tag.find_by(id: tag)
+      Task.transaction do
+        @task.tags.clear
+        new_tags.each do |tag|
+          @task.tags << Tag.find_by(id: tag)
+        end
       end
     end
 end

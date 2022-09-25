@@ -1,14 +1,3 @@
 main style='max-width: 500px; margin: auto;'
-  h2 ="#{t('.title')} #{@project.title}"
-  = simple_form_for @task, url: project_tasks_path do |f|
-    = f.input :title
-    = f.input :description
-    = f.input :is_done, as: :boolean
-    = f.label :tags, t('.tags')
-    = link_to t('.create_new_tag'), new_tag_path, class: 'btn btn-link'
-    = f.input_field :tags, collection: @all_tags, as: :check_boxes, label_method: :title,
-            value_method: :id, input_html: { multiple: true }
-    br
-    = f.file_field :file
-    br
-    = f.button :submit, t('.create'), class: 'btn btn-primary mt-2'
+  h1 ="#{t('.title')} #{@project.title}"
+  = render 'partials/projects/form', url: project_tasks_url(@project), submit_text: t('.create')

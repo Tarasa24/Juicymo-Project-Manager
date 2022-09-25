@@ -1,0 +1,38 @@
+en:
+  activerecord:
+    attributes:
+      user:
+        first_name: "First name"
+        second_name: "Second name"
+        email: "E-mail"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        current_password: "Current password"
+    errors:
+      models:
+        user:
+          attributes:
+            first_name:
+              blank: "can't be blank"
+              too_long: "is too long (max. %{count} characters)"
+            second_name:
+              blank: "can't be blank"
+              too_long: "is too long (max. %{count} characters)"
+            email:
+              blank: "can't be blank"
+              too_long: "is too long (max. %{count} characters)"
+              invalid: "is invalid"
+            password:
+              blank: "can't be blank"
+              too_long: "is too long (max. %{count} characters)"
+              too_short: "is too short (min. %{count} characters)"
+            password_confirmation:
+              blank: "can't be blank"
+              too_long: "is too long (max. %{count} characters)"
+              too_short: "is too short (min. %{count} characters)"
+              confirmation: "doesn't match password"
+            current_password:
+              blank: "can't be blank"
+              too_long: "is too long (max. %{count} characters)"
+              too_short: "is too short (min. %{count} characters)"
+              confirmation: "doesn't match password"

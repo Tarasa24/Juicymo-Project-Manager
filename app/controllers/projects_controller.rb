@@ -2,7 +2,7 @@
 
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :move]
 
   # GET / (authenticated)
   # GET /projects
@@ -47,20 +47,19 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   def update
     # @project is already set by set_project
+    if @project.update(project_params)
+      redirect_to projects_path, notice: t(".success")
+    else
+      redirect_to projects_path, alert: t(".failure")
+    end
+  end
 
-    # In case user is trying to update the position
-    if params[:direction].present?
-      if @project.move_position(params[:direction].to_s)
-        redirect_to projects_path, notice: t(".success")
-      else
-        redirect_to projects_path, alert: t(".failure")
-      end
-    else # Otherwise, update the project
-      if @project.update(project_params)
-        redirect_to projects_path, notice: t(".success")
-      else
-        redirect_to projects_path, alert: t(".failure")
-      end
+  # PATCH /projects/1/move
+  def move
+    if @project.move_position(params[:direction].to_s)
+      redirect_to projects_path, notice: t(".success")
+    else
+      redirect_to projects_path, alert: t(".failure")
     end
   end
 

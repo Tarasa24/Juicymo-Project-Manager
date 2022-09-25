@@ -11,11 +11,16 @@ cs:
     turbo_confirm: "Opravdu chcete smazat tento záznam?"
 
   # Views
+  search:
+    title: "Název"
+    type: "Typ"
+    empty_query: "Prosím zadejte hledaný výraz."
   nav:
     home: "Domů"
     projects: "Projekty"
     tasks: "Úkoly"
     tags: "Štítky"
+    search: "Hledat v názvech"
   home:
     index:
       title: "Systém pro správu projektů"
@@ -52,6 +57,9 @@ cs:
     update:
       success: "Projekt byl úspěšně aktualizován."
       failure: "Projekt nemohl být aktualizován."
+    move:
+      success: "Projekt byl úspěšně přesunut."
+      failure: "Projekt nemohl být přesunut."
     destroy:
       success: "Projekt byl úspěšně smazán."
       failure: "Projekt nemohl být smazán."

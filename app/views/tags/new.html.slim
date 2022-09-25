@@ -1,5 +1,3 @@
 main style='max-width: 500px; margin: auto;'
   h1 =t('.title')
-  = simple_form_for @tag, url: tags_path, method: :post do |f|
-    = f.input :title
-    = f.submit t('.create'), class: 'btn btn-primary mt-2'
+  = render 'partials/common_form', model: @tag, url: tags_url, submit_text: t('.create')
